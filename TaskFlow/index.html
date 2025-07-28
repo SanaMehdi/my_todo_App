@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Personal Todo Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <i class="fas fa-tasks"></i>
+                    TaskFlow
+                </h1>
+                <div class="date-display">
+                    <i class="far fa-calendar-alt"></i>
+                    <span id="currentDate"></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="task-input-section">
+                <div class="input-container">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        placeholder="What needs to be done today?" 
+                        maxlength="200"
+                        autocomplete="off"
+                    >
+                    <button id="addTaskBtn" class="add-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="task-stats">
+                    <span id="totalTasks">0 tasks</span>
+                    <span id="completedTasks">0 completed</span>
+                </div>
+            </section>
+
+            <section class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-list"></i> All
+                    </button>
+                    <button class="filter-btn" data-filter="pending">
+                        <i class="fas fa-clock"></i> Pending
+                    </button>
+                    <button class="filter-btn" data-filter="completed">
+                        <i class="fas fa-check"></i> Completed
+                    </button>
+                </div>
+                <button id="clearCompleted" class="clear-btn">
+                    <i class="fas fa-trash-alt"></i> Clear Completed
+                </button>
+            </section>
+
+            <section class="tasks-section">
+                <div id="tasksContainer" class="tasks-container">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No tasks yet</h3>
+                        <p>Add a task above to get started!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
