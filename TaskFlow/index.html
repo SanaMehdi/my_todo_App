@@ -11,70 +11,172 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header class="app-header">
-            <div class="header-content">
-                <h1 class="app-title">
-                    <i class="fas fa-tasks"></i>
-                    TaskFlow
-                </h1>
-                <div class="date-display">
-                    <i class="far fa-calendar-alt"></i>
-                    <span id="currentDate"></span>
-                </div>
-            </div>
-        </header>
-
-        <main class="main-content">
-            <section class="task-input-section">
-                <div class="input-container">
-                    <input 
-                        type="text" 
-                        id="taskInput" 
-                        placeholder="What needs to be done today?" 
-                        maxlength="200"
-                        autocomplete="off"
-                    >
-                    <button id="addTaskBtn" class="add-btn">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-                <div class="task-stats">
-                    <span id="totalTasks">0 tasks</span>
-                    <span id="completedTasks">0 completed</span>
-                </div>
-            </section>
-
-            <section class="filter-section">
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">
-                        <i class="fas fa-list"></i> All
-                    </button>
-                    <button class="filter-btn" data-filter="pending">
-                        <i class="fas fa-clock"></i> Pending
-                    </button>
-                    <button class="filter-btn" data-filter="completed">
-                        <i class="fas fa-check"></i> Completed
-                    </button>
-                </div>
-                <button id="clearCompleted" class="clear-btn">
-                    <i class="fas fa-trash-alt"></i> Clear Completed
-                </button>
-            </section>
-
-            <section class="tasks-section">
-                <div id="tasksContainer" class="tasks-container">
-                    <div class="empty-state" id="emptyState">
-                        <i class="fas fa-clipboard-list"></i>
-                        <h3>No tasks yet</h3>
-                        <p>Add a task above to get started!</p>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="auth-logo">
+                        <i class="fas fa-tasks"></i>
                     </div>
+                    <h1 class="auth-title">Welcome Back</h1>
+                    <p class="auth-subtitle">Sign in to your TaskFlow account</p>
                 </div>
-            </section>
-        </main>
+                
+                <form class="auth-form" id="loginForm">
+                    <div id="loginMessage"></div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                    
+                    <div class="auth-switch">
+                        <span class="auth-switch-text">Don't have an account? </span>
+                        <a href="#" class="auth-switch-link" id="showSignup">Create Account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
+    <!-- Signup Screen -->
+    <div id="signupScreen" class="screen">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="auth-logo">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h1 class="auth-title">Create Account</h1>
+                    <p class="auth-subtitle">Join TaskFlow to manage your tasks</p>
+                </div>
+                
+                <form class="auth-form" id="signupForm">
+                    <div id="signupMessage"></div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupName">Full Name</label>
+                        <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" id="signupBtn">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    
+                    <div class="auth-switch">
+                        <span class="auth-switch-text">Already have an account? </span>
+                        <a href="#" class="auth-switch-link" id="showLogin">Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Screen (wrap your existing content) -->
+    <div id="appScreen" class="screen">
+        <div class="container">
+            <header class="app-header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <h1 class="app-title">
+                            <i class="fas fa-tasks"></i>
+                            TaskFlow
+                        </h1>
+                        <div class="user-info">
+                            Welcome back, <span id="currentUser"></span>!
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="date-display">
+                            <i class="far fa-calendar-alt"></i>
+                            <span id="currentDate"></span>
+                        </div>
+                        <button class="logout-btn" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <section class="task-input-section">
+                    <div class="input-container">
+                        <input 
+                            type="text" 
+                            id="taskInput" 
+                            placeholder="What needs to be done today?" 
+                            maxlength="200"
+                            autocomplete="off"
+                        >
+                        <button id="addTaskBtn" class="add-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="task-stats">
+                        <span id="totalTasks">0 tasks</span>
+                        <span id="completedTasks">0 completed</span>
+                    </div>
+                </section>
+
+                <section class="filter-section">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fas fa-list"></i> All
+                        </button>
+                        <button class="filter-btn" data-filter="pending">
+                            <i class="fas fa-clock"></i> Pending
+                        </button>
+                        <button class="filter-btn" data-filter="completed">
+                            <i class="fas fa-check"></i> Completed
+                        </button>
+                    </div>
+                    <button id="clearCompleted" class="clear-btn">
+                        <i class="fas fa-trash-alt"></i> Clear Completed
+                    </button>
+                </section>
+
+                <section class="tasks-section">
+                    <div id="tasksContainer" class="tasks-container">
+                        <div class="empty-state" id="emptyState">
+                            <i class="fas fa-clipboard-list"></i>
+                            <h3>No tasks yet</h3>
+                            <p>Add a task above to get started!</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
+
 
